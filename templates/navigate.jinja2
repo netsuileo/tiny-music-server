@@ -1,0 +1,33 @@
+<html>
+<head>
+    <title>{{ path }}</title>
+    <link href="{{ url_for('static', path='milligram.css') }}" rel="stylesheet">
+</head>
+<body>
+    <section class="container">
+        <a href="../">Назад</a>
+    </section>
+
+    <section class="container">
+        <ol>
+        {% for folder in folders %}
+            <li><a href="{{ folder }}/">{{ folder }}</a></li>
+        {% endfor %}
+        </ol>
+    </section>
+
+    <section class="container">
+        <ol>
+        {% for file in files %}
+        {% if file.name.endswith('mp3') %}
+            <li>
+                <a href="{{ url_for('media', path=file.path) }}">{{ file.name }}</a>
+                <br/>
+                <audio controls src="{{ url_for('media', path=file.path) }}" />
+            </li>
+        {% endif %}
+        {% endfor %}
+        </ol>
+    </section>
+</body>
+</html>
