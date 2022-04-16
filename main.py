@@ -7,8 +7,11 @@ from fastapi.responses import HTMLResponse, RedirectResponse
 from fastapi.staticfiles import StaticFiles
 from fastapi.templating import Jinja2Templates
 
-MUSIC_FOLDER = Path(os.environ.get("MUSIC_FOLDER", "./files/"))
+if not os.environ.get("MUSIC_FOLDER"):
+    raise ValueError("No MUSIC_FOLDER defined")
 
+
+MUSIC_FOLDER = Path(os.environ.get("MUSIC_FOLDER"))
 app = FastAPI()
 app.mount("/static", StaticFiles(directory="static"), name="static")
 app.mount("/media", StaticFiles(directory=MUSIC_FOLDER), name="media")
@@ -32,7 +35,7 @@ async def navigate(request: Request, directory_path: str):
     if not is_path_allowed:
         raise HTTPException(status_code=404)
 
-    directory = list(os.scandir(path))
+    directory = sorted(os.scandir(path), key=lambda item: item.name)
     return templates.TemplateResponse(
         "navigate.jinja2",
         {

@@ -1,33 +1,44 @@
 <html>
 <head>
-    <title>{{ path }}</title>
-    <link href="{{ url_for('static', path='milligram.css') }}" rel="stylesheet">
+    <title>{{ path or "Home"}}</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="{{ url_for('static', path='css/milligram.css') }}" rel="stylesheet">
+    <link href="{{ url_for('static', path='css/player.css') }}" rel="stylesheet">
 </head>
 <body>
     <section class="container">
-        <a href="../">Назад</a>
-    </section>
-
-    <section class="container">
-        <ol>
-        {% for folder in folders %}
-            <li><a href="{{ folder }}/">{{ folder }}</a></li>
-        {% endfor %}
-        </ol>
-    </section>
-
-    <section class="container">
-        <ol>
-        {% for file in files %}
-        {% if file.name.endswith('mp3') %}
-            <li>
-                <a href="{{ url_for('media', path=file.path) }}">{{ file.name }}</a>
-                <br/>
-                <audio controls src="{{ url_for('media', path=file.path) }}" />
-            </li>
+        {% if path %}
+        <div class="row">
+            <a class="button" href="../">Назад</a>
+        </div>
         {% endif %}
+        {% for folder in folders %}
+        <div class="row">
+            <a class="button" href="{{ folder }}/">{{ folder }}</a>
+        </div>
         {% endfor %}
-        </ol>
     </section>
+    
+    {% if files %}
+    <section class="container">
+        <div class="simple-audio-player" id="simp" data-config='{"shide_top":false,"shide_btm":false,"auto_load":true}'>
+            <div class="simp-playlist">
+                <ul>
+                    {% for file in files %}
+                    <li>
+                        <span class="simp-source" data-src="{{ url_for('media', path=file.path) }}">
+                            {{ file.name }}
+                        </span>
+                        <span class="simp-desc">
+                            {{ file.name }}
+                        </span>
+                    </li>
+                    {% endfor %}
+                </ul>
+            </div>
+        </div>
+    </section>
+    <script src="{{ url_for('static', path='/js/player.js') }}"></script>
+    {% endif %}
 </body>
 </html>
