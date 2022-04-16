@@ -62,8 +62,12 @@ function simp_initTime() {
     if (simp_isNext) { //auto load next audio
       var elem;
       simp_a_index++;
-      if (simp_a_index == simp_a_url.length) { // pause playing
+      if (simp_a_index == simp_a_url.length) {
+        // pause playing
         simp_isPlaying = false;
+        //repeat all audio
+        // simp_a_index = 0;
+        // elem = simp_a_url[0];
       } else {
         elem = simp_a_url[simp_a_index];  
       }

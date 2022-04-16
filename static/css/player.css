@@ -1,12 +1,11 @@
 @import url('https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css');
 
-/* *,*:before,*:after{outline:0;-webkit-box-sizing:border-box;box-sizing:border-box;}
+*,*:before,*:after{outline:0;-webkit-box-sizing:border-box;box-sizing:border-box;}
 input,button{outline:none;}
-a,a:hover,a:visited{color:#ddd;text-decoration:none;}
 .flex{display:-webkit-flex;display:flex;}
 .flex-wrap{display:-webkit-flex;display:flex;-webkit-flex-wrap:wrap;flex-wrap:wrap;}
 .flex-align{-webkit-align-items:center;align-items:center;}
-.w-full{width:100%;} */
+.w-full{width:100%;}
 
 /* HTML5 Audio Player with Playlist, source: https://codepen.io/sekedus/pen/ExxjZEz */
 #simp button,#simp input,#simp img{border:0;}
